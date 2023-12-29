@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+<div>
+    <a href="{{ url_for('student_list') }}">All Students</a><br>
+    {% if usr.is_authenticated %}
+    <a href="{{ url_for('logout') }}">Log-out</a><br>
+    <a href="{{ url_for('profile') }}">profile</a><br>
+    {% else %}
+    <a href="{{ url_for('login') }}">Login</a>
+    <br>
+    <a href="{{ url_for('registration') }}">Register</a>
+    <br>
+    {% endif %}
+
+    <h3>this is home page</h3>
+    <h1>{{ usr.name }}</h1>
+</div>
+
+{% endblock %}
