@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<a href="{{ url_for('home') }}">home</a><br>
+
+<h2>logged in student</h2>
+<ul>
+        <li>
+            <h4>Student ID: {{ active_user.id }}</h4>
+            <h4>Name: {{ active_user.name }}</h4>
+            <h4>Email: {{ active_user.email }}</h4>
+            <h4>Class: {{ active_user.class_name }}</h4>
+            <h4>Password: {{ active_user.password }}</h4>
+            <h4>Registration No: {{ active_user.registration_no }}</h4>
+        </li>
+</ul>
+
+
+
+<h2>logged in Principle</h2>
+<ul>
+        <li>
+            <h4>Name: {{ active_user.name }}</h4>
+            <h4>Email: {{ active_user.email }}</h4>
+            <h4>Password: {{ active_user.password }}</h4>
+        </li>
+</ul>
+
+
+<a href="{{ url_for('update_profile')}}">Update-Profile</a>
+
+{% endblock %}
