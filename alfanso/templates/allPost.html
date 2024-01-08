@@ -1,0 +1,11 @@
+<div class="nav-item"><a href="{{ url_for('post') }}">Create-post</a></div><br>
+
+{% for post in posts %}
+    <div style="background-color: rgb(212, 255, 0);">
+        Posted-by : {{ post.author }} 
+        On :{{ post.created_at }} <br>
+        Title : {{ post.title }} <br>
+        Content : {{ post.content }} <br>
+    </div>
+    <br>
+{% endfor %}

@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-
+{% include 'message.html' %}
 {% block content %}
 
 <a href="{{ url_for('home') }}">home</a><br>
@@ -26,12 +26,15 @@
         <form action="" method="POST">
             <span>student</span><br>
             <div>
-                <label for="registration_no">Registration_No:</label>
-                <input type="number" name="registration_no">
+                <label for="email">Email:</label>
+                <input type="text" name="email">
             </div>
             <div>
                 <label for="password">Password:</label>
                 <input type="password" name="password">
+            </div>
+            <div>
+                <input type="hidden"  name="login_as" value="{{ login_as }}">
             </div>
             <input type="submit" value="Login">             
         </form>

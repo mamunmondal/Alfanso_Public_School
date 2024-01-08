@@ -1,0 +1,79 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<form action="" method="POST">
+    <label for="registration_no">Enter Registration Number :</label>
+    <input type="number" name="registration_no">
+    <input type="submit" value="submit">
+</form>
+
+{% if student is defined %}
+<div class="form_container">
+    <form action="" method="POST">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" name="name" value="{{ student.name }}">
+        </div>
+        <div>
+            <label for="class">Class:</label>
+            <input type="number" name="class" value="{{ student.class_name }}">
+        </div>
+        <div>
+            <label for="rull">Rull_no:</label>
+            <input type="number" name="rull" value="{{ student.rull }}">
+        </div>
+        <div>
+            <label for="registration_no">Registration_No:</label>
+            <input type="number" name="registration_no" value="{{ student.registration_no }}">
+        </div>
+
+        {% if student.vilage %}
+        <div>
+            <label for="vilage">Vilage:</label>
+            <input type="text" name="vilage" value="{{ student.vilage }}">
+        </div>
+        {% endif %}
+
+        {% if student.post_office %}
+        <div>
+            <label for="post_office">Post_Office:</label>
+            <input type="text" name="post_office" value="{{ student.post_office }}">
+        </div>
+        {% endif %}
+
+        {% if student.pin %}
+        <div>
+            <label for="pin">Pin:</label>
+            <input type="number" name="pin" value="{{ student.pin }}">
+        </div>
+        {% endif %}
+
+        {% if student.police_station %}
+        <div>
+            <label for="police_station">Police Station:</label>
+            <input type="text" name="police_station" value="{{ student.police_station }}">
+        </div>
+        {% endif %}
+
+        {% if student.dist %}
+        <div>
+            <label for="dist">Dist:</label>
+            <input type="text" name="dist" value="{{ student.dist }}">
+        </div>
+        {% endif %}
+
+        {% if student.state %}
+        <div>
+            <label for="state">state:</label>
+            <input type="text" name="state" value="{{ student.state }}">
+        </div>
+        {% endif %}  
+    </form>
+</div>
+
+<a href="">add more information</a>
+<a href="">update</a>
+
+{% endif %}
+
+{% endblock %}

@@ -1,23 +1,32 @@
 {% extends 'main.html' %}
 
+
 {% block content %}
-
-
+{% if current_user.is_authenticated %}
 <div>
+    {% include 'nav.html' %}
+</div>
+{% endif %}
+
+<div class="home-container">
     {% if active_user.is_authenticated %}
-    <a href="{{ url_for('student_list') }}">All Students</a><br>
-    
-    <a href="{{ url_for('profile') }}">Check_Your_Profile</a><br>
-    <a href="{{ url_for('registration') }}">Register_New_student</a>
-    <br>
-    <a href="{{ url_for('logout') }}">Log-out</a><br>
-    <br>
+        <h1>This the Home Page</h1>
+
+        {% include 'post.html' %}
+
     {% else %}
-    <a href="{{ url_for('login') }}">Login</a>
+        <div class="home-randuser-container">
+            <div class="home-randuser-container-message">
+                <h3>YOU WANT TO EXPLORE !</h3>
+                <h5>Here will be breife explaination about ALFANSO PUBLIC SCHOOL for the random user</h5>
+            </div>
+            <div class="home-randuser-container-auth">
+                <div><a href="{{ url_for('login') }}">Login</a><br></div>
+                <div><a href="{{ url_for('create_account') }}">Create An Account</a></div>
+            </div>
+        </div>
     {% endif %}
 
-    <h3>this is home page</h3>
-    <h1>{{ active_user.name }}</h1>
 </div>
 
-{% endblock %}
+{% endblock %} class="home-contaner"

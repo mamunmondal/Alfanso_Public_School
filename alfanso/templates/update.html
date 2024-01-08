@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/update.css') }}">
+    <title>Update User</title>
+</head>
+<body>
+    
+
+<!-- update a student  -->
+<div class="update-user">
+
+    <div class="form-container existing-details">
+        <span>Exsisting Details :</span> <hr>
+        <form>
+            <div>
+                <label for="name">Name: <span>{{student.name}}</span></label>
+            </div>
+            <div>
+                <label for="class">Class: <span>{{student.class_name}}</span></label>
+            </div>
+            <div>
+                <label for="rull">Rull_no: <span>{{student.rull}}</span></label>
+            </div>
+            <div>
+                <label for="registration_no">Registration_No: <span>{{student.registration_no}}</span></label>
+            </div>            
+        </form>
+    </div>
+
+    <div class="form-container">
+        <form action="" method="POST">
+            <span>Fill 
+                The Field You Want To Change :</span> <hr>
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" name="name">
+            </div>
+            <div>
+                <label for="class">Class:</label>
+                <input type="number" name="class">
+            </div>
+            <div>
+                <label for="rull">Rull_no:</label>
+                <input type="number" name="rull">
+            </div>  
+            
+            <input type="submit" value="Udate">
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

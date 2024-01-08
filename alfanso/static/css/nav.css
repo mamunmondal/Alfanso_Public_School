@@ -1,0 +1,31 @@
+.navigation-bar {
+    display: flex;
+    justify-content: center ;
+    max-width: 100%;
+}
+.navigation-bar-left {
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+    height: 50px;
+    width: fit-content;
+    background-color: rgb(119, 200, 253);
+    border-radius: 25px;
+}
+
+.nav-item { 
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: rgb(180, 255, 99);
+    text-decoration: none;
+}
+.nav-item a{ 
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.nav-item a :hover{ 
+    color: red;
+    
+}
