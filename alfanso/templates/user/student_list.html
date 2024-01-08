@@ -1,0 +1,70 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="Student-list">
+
+      <button> <a href="{{ url_for('home') }}">home</a><br> </button> 
+
+
+        {% if students %}
+        <form action="">
+            <div class="see_student_of"> 
+                <input type="submit" value="ALL-STUDENT">
+                <p>Student Of - </p>
+                <input type="submit" value="i">
+                <input type="submit" value="ii">
+                <input type="submit" value="iii">
+                <input type="submit" value="iv">
+                <input type="submit" value="v">
+                <input type="submit" value="vi">
+                <input type="submit" value="vii">
+                <input type="submit" value="viii">
+                <input type="submit" value="ix">
+                <input type="submit" value="x">
+
+            </div>
+        </form>
+        <br>
+
+            <div class="student-table">
+                <table>
+                    <tr>
+                        <th>Serial_NO</th>
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>Rull_No</th>
+                        <th>Registration_No</th>
+
+                        {% if current_user.__tablename__ == 'principle' %}
+                        <th><a href="{{ url_for('register_new_student') }}">Add-Student</a></th>
+                        {% endif %}
+
+                    </tr>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.class_name }}</td>
+                        <td>{{ student.rull }}</td>
+                        <td>{{ student.registration_no }}</td>  
+
+                        {% if current_user.__tablename__ == 'principle' %}
+                        <td><a href="{{ url_for('update' , registration=student.registration_no | string) }}">Edit</a> / <a href="{{ url_for('delete_user' , registration=student.registration_no | string) }}">Delete</a></td>
+                        {% endif %}
+
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+
+        {% else %}
+
+        <h1>No student Found</h1>
+        <a href="{{ url_for('register_new_student') }}">Add-Student</a>
+
+        {% endif %}
+
+</div>
+
+{% endblock %}

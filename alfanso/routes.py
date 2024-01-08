@@ -16,7 +16,7 @@ def load_user(user_id):
 @app.route('/')
 def home():
     active_user = current_user
-    return render_template('home.html', active_user = active_user)
+    return render_template('base/home.html', active_user = active_user)
 
 
 
@@ -32,7 +32,7 @@ def create_account():
             password = request.form['password']
             registration_no = request.form['registration_no']
 
-            student = StudentLogin(username=username, email=email, password=password, registration_no=registration_no)
+            student = Student(username=username, email=email, password=password, registration_no=registration_no)
 
             valid_student = Student.query.filter_by(registration_no=student.registration_no).first()
 
@@ -40,12 +40,12 @@ def create_account():
                 db.session.add(student)
                 db.session.commit()
                 flash('You Can Login Now , Click as_student')
-                return redirect(url_for('login'))
+                return redirect(url_for('auth/login'))
             else:
                 flash('Entered Registraion No Does Not Exist! , Try As Others')
             
                         
-    return render_template('create_account.html')
+    return render_template('auth/create_account.html')
 
 
 @app.route('/register_new_student',methods=['GET','POST'])
@@ -57,16 +57,15 @@ def register_new_student():
         registration_no = request.form['registration_no']
         rull = request.form['rull']
         password = request.form['password']
-        email = username+'@aps.com'
+      
 
-
-        new_student = Student(name=name, rull=rull, email=email, password=password, class_name=class_name, registration_no=registration_no,username=username)
+        new_student = Student(name=name, rull=rull, password=password, class_name=class_name, registration_no=registration_no,username=username)
 
         db.session.add(new_student)
         db.session.commit()
         return redirect(url_for('student_list'))
 
-    return render_template('register_new_student.html')
+    return render_template('user/register_new_student.html')
 
 
 
@@ -76,7 +75,7 @@ def login():
     if request.method == 'POST' and len(request.form) == 1:
         login_as = ''
         login_as = request.form['loginTypeInput']
-        return render_template('login.html',login_as=login_as)
+        return render_template('auth/login.html',login_as=login_as)
 
     if request.method == 'POST' and len(request.form) > 1:
             # here login_as variable decide who is trying to login 
@@ -94,9 +93,9 @@ def login():
             
             # will authenticate the student
             if login_as == 'student':
-                email = request.form['email']
+                registration_no = request.form['registration_no']
                 password = request.form['password']
-                student = Student.query.filter_by(email=email).first()
+                student = Student.query.filter_by(registration_no=registration_no).first()
                 if student and student.password == password:
                     login_user(student)
                     flash('YOU ARE LOGGED IN')
@@ -104,7 +103,7 @@ def login():
                 else:
                     flash('Please provide the correct information')
 
-    return render_template('login.html',)
+    return render_template('auth/login.html',)
     
     
 
@@ -114,38 +113,8 @@ def logout():
     return redirect(url_for('home'))
 
 
-@app.route('/students_details', methods=['GET','POST'])
-def students_details():
-    
-    if request.method == 'POST':
-        reg = request.form['registration_no']
-        student = Student.query.filter_by(registration_no = reg).first()
-        if student:
-            return render_template('students_details.html', student = student)
-
-    return render_template('students_details.html')
 
 
-@app.route('/update/<string:registration>',  methods=['GET','POST'])
-def update(registration):
-    student = Student.query.filter_by(registration_no=registration).first()
-
-    if request.method == 'POST':
-        name = request.form['name']
-        class_name = request.form['class']
-        rull = request.form['rull']
-
-        if student:
-            if name:
-                student.name = name
-            if class_name:
-                student.class_name = class_name
-            if rull:
-                student.rull = rull
-            db.session.commit()
-            return redirect(url_for('student_list'))
-    
-    return render_template('update.html', student = student)
 
 
 @app.route('/delete_user/<string:registration>',  methods=['GET','POST'])
@@ -157,7 +126,7 @@ def delete_user(registration):
             db.session.commit()
             return redirect(url_for('student_list'))
     
-    return render_template('delete_user.html', student = student)
+    return render_template('user/delete_user.html', student = student)
 
 
 
@@ -170,24 +139,32 @@ def post():
         if current_user.__tablename__ == 'student':
             post = Post(title=title, content=content, student_id=current_user.id)
         if current_user.__tablename__ == 'principle':
-            post = Post(title=title, content=content, principle=current_user.id)
+            post = Post(title=title, content=content, principle_id=current_user.id)
 
         if post:
             db.session.add(post)
             db.session.commit()
             return redirect(url_for('allPost'))
-    return render_template('post.html')
+    return render_template('blog/post.html')
 
 
 @app.route('/allPost')
 def allPost():
     posts = Post.query.all()
-    return render_template('allPost.html',posts=posts)
+    return render_template('blog/allPost.html',posts=posts)
+
+@app.route('/yourPost')
+def yourPost():
+    return render_template('blog/yourPost.html')
 
 
+@app.route('/profile')
+def profile():
+    active_user = current_user
+    return render_template('user/profile.html', active_user=active_user)
 
 
 @app.route('/student_list')
 def student_list():
     students = Student.query.all()
-    return render_template('student_list.html', students = students)
+    return render_template('user/student_list.html', students = students)

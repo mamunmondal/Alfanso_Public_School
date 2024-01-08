@@ -30,7 +30,6 @@ class Student(User,PersonalInfo):
     registration_no = db.Column(db.String(20), nullable=False, unique=True)
     rull = db.Column(db.String(20), nullable=False)
     password = db.Column(db.String(60), nullable=False)
-    email = db.Column(db.String(20), default=lambda self: self.username + "@aps.com")
     posts = relationship('Post', backref='student', lazy=True)
 
 

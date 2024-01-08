@@ -1,0 +1,8 @@
+.create-account .form-container {
+    display: none;
+}
+.create-account button {
+    background-color: white;
+    border: .5px solid black;
+    border-radius: 5px;
+}

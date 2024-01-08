@@ -1,0 +1,82 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<div class="login">
+
+
+    <a href="{{ url_for('home') }}">home</a><br>
+
+        {% if login_as is not defined %}
+        <div>
+            <form id="loginForm" action="" method="POST">
+                <p>How do you want to login?</p>
+                <input type="button" value="as_student" onclick="setLoginType('student')">
+                <input type="button" value="as_faculty" onclick="setLoginType('faculty')">
+                <input type="button" value="as_principle" onclick="setLoginType('principle')">
+
+                <!-- Hidden input field to store the selected login type -->
+                <input type="hidden" id="loginTypeInput" name="loginTypeInput" value="">
+            </form>
+        </div>
+
+        {% endif %}
+
+
+        {% if login_as == 'student' %}
+
+        <div class="form_container">
+            <form action="" method="POST">
+                <span>student</span><br>
+                <div>
+                    <label for="registration_no">Registration_No:</label>
+                    <input type="text" name="registration_no">
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" name="password">
+                </div>
+                <div>
+                    <input type="hidden"  name="login_as" value="{{ login_as }}">
+                </div>
+                <input type="submit" value="Login">             
+            </form>
+        </div>
+
+        {% endif %}
+        
+        {% if login_as == 'principle' %}
+        <h2>principle</h2>
+        <div class="form_container">
+            <form action="" method="POST">
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="text" name="email">
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" name="password">
+                </div>
+                <div>
+                    <input type="hidden"  name="login_as" value="{{ login_as }}">
+                </div>
+                <input type="submit" value="Login">             
+            </form>
+        </div>
+        {% endif %}
+
+        
+        <script>
+            function setLoginType(loginType) {
+                // Set the selected login type to a hidden input field
+                document.getElementById('loginTypeInput').value = loginType;
+                
+                // Submit the form
+                document.getElementById('loginForm').submit();
+            }
+        </script>
+
+
+</div>
+
+    {% endblock %}

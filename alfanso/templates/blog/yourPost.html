@@ -1,0 +1,11 @@
+<h2>All Are Posted By You :</h2>
+
+{% for post in current_user.posts %}
+    <div style="background-color: rgb(212, 255, 0);">
+        <h3>{{ loop.index }}</h3><br>
+        On :{{ post.created_at }} <br>
+        Title : {{ post.title }} <br>
+        Content : {{ post.content }} <br>
+    </div>
+    <br>
+{% endfor %}

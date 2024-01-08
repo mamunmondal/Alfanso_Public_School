@@ -1,26 +1,25 @@
-{% extends 'main.html' %}
+{% extends 'base/base.html' %}
 
 
 {% block content %}
 {% if current_user.is_authenticated %}
-<div>
-    {% include 'nav.html' %}
-</div>
+
 {% endif %}
 
-<div class="home-container">
+<div class="home">
     {% if active_user.is_authenticated %}
-        <h1>This the Home Page</h1>
+    <div>
 
-        {% include 'post.html' %}
+        <h2 id="hi  ">This the Home Page</h2>
+    </div>
 
     {% else %}
-        <div class="home-randuser-container">
-            <div class="home-randuser-container-message">
+        <div class="randuser">
+            <div class="randuser-message">
                 <h3>YOU WANT TO EXPLORE !</h3>
                 <h5>Here will be breife explaination about ALFANSO PUBLIC SCHOOL for the random user</h5>
             </div>
-            <div class="home-randuser-container-auth">
+            <div class="randuser-auth">
                 <div><a href="{{ url_for('login') }}">Login</a><br></div>
                 <div><a href="{{ url_for('create_account') }}">Create An Account</a></div>
             </div>

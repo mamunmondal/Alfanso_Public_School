@@ -1,13 +1,14 @@
-{% extends 'main.html' %}
+{% extends 'base/base.html' %}
 
 {% block content %}
 
 <a href="{{ url_for('home') }}">home</a><br>
+<a href="{{ url_for('yourPost') }}">yourPosts</a><br>
 
+{% if current_user.__tablename__ == 'student' %}
 <h2>logged in student</h2>
 <ul>
         <li>
-            <h4>Student ID: {{ active_user.id }}</h4>
             <h4>Name: {{ active_user.name }}</h4>
             <h4>Email: {{ active_user.email }}</h4>
             <h4>Class: {{ active_user.class_name }}</h4>
@@ -16,8 +17,9 @@
         </li>
 </ul>
 
+{% endif %}
 
-
+{% if current_user.__tablename__ == 'principle' %}
 <h2>logged in Principle</h2>
 <ul>
         <li>
@@ -27,7 +29,8 @@
         </li>
 </ul>
 
+{% endif %}
 
-<a href="{{ url_for('update_profile')}}">Update-Profile</a>
+
 
 {% endblock %}
